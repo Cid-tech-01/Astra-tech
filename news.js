@@ -19,30 +19,70 @@ const data = [
   { id: 18, news: "Sahara desert experiencing unprecedented greening due to climate shifts" }
 ];
 
-// function findNewsbyId(NewsArray,targetId){
-//     const foundItem = NewsArray.find(item=>item.id===targetId);
-//     if(foundItem){
-//         console.log(`Found`,foundItem);
-//     }
-//     else{
-//         console.log(`Error: News item with ID ${targetId} not found.`);
-//     }
-// }
-function findNewsbyId(newsArray,targetId){
-    for(let i=1;i<=newsArray.length;i++){
-        if(newsArray[i].id===targetId){
-            console.log(`Found: `, newsArray[i]);
-            return;
-        }
+function findNewsbyId(NewsArray,targetId){
+    const foundItem = NewsArray.find(item=>item.id===targetId);
+    if(foundItem){
+        console.log(`Found`,foundItem);
     }
-    console.log(`Error news not found`);
+    else{
+        console.log(`Error: News item with ID ${targetId} not found.`);
+    }
 }
+// function findNewsbyId(newsArray,targetId){
+//     for(let i=1;i<=newsArray.length;i++){
+//         if(newsArray[i].id===targetId){
+//             console.log(`Found: `, newsArray[i]);
+//             return;
+//         }
+//     }
+//     console.log(`Error news not found`);
+// }
 findNewsbyId(data,2);
 findNewsbyId(data,11);
 
-function printFromTop(newsArray,targetId){
-    for(let i=0;i<targetId;i++){
-        console.log(newsArray[i]);
-    }
+// function printFromTop(newsArray,targetId){
+//     for(let i=0;i<targetId;i++){
+//         console.log(newsArray[i]);
+//     }
+// }
+// printFromTop(data,6);
+function printfromstart(Array,limit){
+    const lenodfData=Array.length;
+    return Array.slice(lenodfData-limit,lenodfData);
 }
-printFromTop(data,6);
+printfromstart(data,2);
+
+function printFromLast(newsArray,start,last){
+        console.log(newsArray.slice(start,last));
+}
+printFromLast(data,10,16);
+
+function searchNews(data, keyword) {
+  if (!keyword) return [];
+
+  const lowerKeyword = keyword.toLowerCase();
+  return data.filter(item => item.news.toLowerCase().includes(lowerKeyword));
+}
+const results = searchNews(data, "India");
+console.log(results);
+
+// function searchNews(data, keyword){
+//     const word=keyword.toLowerCase();
+//     for(let i=0;i<data.length;i++){
+//         const newstext=data[i].news.toLowerCase();
+//         if(newstext.includes(word))
+//             console.log(data[i]);
+//     }
+// }
+// searchNews(data,"India");
+function newsSearch(data,keyword){
+    const result=[];
+    const word=keyword.toLowerCase();
+    for(const item of data){
+        if(item.news.toLowerCase().includes(word))
+            result.push(item);
+    }
+    return result;
+}
+const matches=newsSearch(data,"India");
+console.log(matches);
